@@ -13,6 +13,7 @@ void greeting()
     const char *line4 = "|____/   \\____| |_|     \\__, | | .__/   \\__|\n";
     const char *line5 = "                        |___/  |_|          \n";
 
+    cout << "" << endl;
     cout << line1;
     cout << line2;
     cout << line3;
