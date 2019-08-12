@@ -8,7 +8,8 @@
 using namespace std;
 
 int METHOD; // Either 0 (encryption) or 1 (decryption)
-string FILENAME;
+string FILENAME; // The name of the source file
+string EXTENSION; // Extension for the output file
 
 void greeting() {
     const char *breakLine = "############################################\n";
@@ -42,14 +43,19 @@ int error(int code, string const &message) {
     exit(code);
 }
 
+void initialize() {
+    EXTENSION = ".crypt";
+}
+
 inline bool exists(const string& file) {
     struct stat buffer;
     return (stat (file.c_str(), &buffer) == 0);
 }
 
 int main(int argc, char** argv) {
-    // Print a ASCII Logo
-    greeting();
+    initialize();
+
+    greeting(); // Print a ASCII Logo
 
     // Exit on wrong usage
     if (argc < 3) {
