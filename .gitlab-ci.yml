@@ -1,3 +1,6 @@
-scrypt-lite:
+stages:
+  - build
+
+build:
   script:
-    - ./build.sh
+    ./build.sh
