@@ -1,21 +1,23 @@
 // main.cpp / This file contains the main() method
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 int METHOD; // Either 0 (encryption) or 1 (decryption)
+string FILENAME;
 
 void greeting()
 {
     const char *breakLine = "############################################\n";
 
-    const char *line0 = " ____     ____                          _\n";
-    const char *line1 = "/ ___|   / ___|  _ __   _   _   _ __   | |_ \n";
-    const char *line2 = "\\___ \\  | |     | '__| | | | | | '_ \\  | __|\n";
-    const char *line3 = " ___) | | |___  | |    | |_| | | |_) | | |_ \n";
-    const char *line4 = "|____/   \\____| |_|     \\__, | | .__/   \\__|\n";
-    const char *line5 = "                        |___/  |_|          \n";
+    const char* line0 = " ____     ____                          _\n";
+    const char* line1 = "/ ___|   / ___|  _ __   _   _   _ __   | |_ \n";
+    const char* line2 = "\\___ \\  | |     | '__| | | | | | '_ \\  | __|\n";
+    const char* line3 = " ___) | | |___  | |    | |_| | | |_) | | |_ \n";
+    const char* line4 = "|____/   \\____| |_|     \\__, | | .__/   \\__|\n";
+    const char* line5 = "                        |___/  |_|          \n";
 
     cout << endl;
     cout << breakLine;
@@ -47,8 +49,8 @@ int main(int argc, char** argv)
     }
 
     // Read arguments
-    const char *method = argv[1];
-    const char *filename = argv[2];
+    const char* method = argv[1];
+    const char* filename = argv[2];
 
     // Set method or exit
     if (method == "-e" || method == "--encrypt") {
@@ -58,4 +60,6 @@ int main(int argc, char** argv)
     } else {
         return error(1, "Invalid method");
     }
+
+    FILENAME = filename;
 }
