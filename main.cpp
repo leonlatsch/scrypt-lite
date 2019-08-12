@@ -4,6 +4,8 @@
 
 using namespace std;
 
+int METHOD; // Either 0 (encryption) or 1 (decryption)
+
 void greeting()
 {
     const char *breakLine = "############################################\n";
@@ -28,14 +30,32 @@ void greeting()
     cout << endl;
 }
 
+int error(int code, string const &message) {
+    cerr << message << endl;
+    return code;
+}
+
 int main(int argc, char** argv)
 {
+    // Print a ASCII Logo
     greeting();
 
+    // Exit on wrong usage
     if (argc < 3) {
         cerr << "Usage: scrypt-lite [OPERATION] [FILENAME]" << endl;
         return 0;
     }
 
+    // Read arguments
+    const char *method = argv[1];
+    const char *filename = argv[2];
 
+    // Set method or exit
+    if (method == "-e" || method == "--encrypt") {
+        METHOD = 0;
+    } else if (method == "-d" || method == "--decrypt") {
+        METHOD = 1;
+    } else {
+        return error(1, "Invalid method");
+    }
 }
