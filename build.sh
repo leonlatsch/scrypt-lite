@@ -1,5 +1,5 @@
 #!/bin/bash
 
 echo "[*] Building scrypt-lite..."
-mkdir build
+mkdir -p build
 g++ main.cpp -o build/scrypt-lite

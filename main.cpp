@@ -6,6 +6,8 @@ using namespace std;
 
 void greeting()
 {
+    const char *breakLine = "############################################\n";
+
     const char *line0 = " ____     ____                          _\n";
     const char *line1 = "/ ___|   / ___|  _ __   _   _   _ __   | |_ \n";
     const char *line2 = "\\___ \\  | |     | '__| | | | | | '_ \\  | __|\n";
@@ -14,7 +16,7 @@ void greeting()
     const char *line5 = "                        |___/  |_|          \n";
 
     cout << endl;
-    cout << "############################################" << endl;
+    cout << breakLine;
     cout << line0;
     cout << line1;
     cout << line2;
@@ -22,11 +24,18 @@ void greeting()
     cout << line4;
     cout << line5;
     cout << endl;
-    cout << "############################################" << endl;
+    cout << breakLine;
     cout << endl;
 }
 
 int main(int argc, char** argv)
 {
     greeting();
+
+    if (argc < 3) {
+        cerr << "Usage: scrypt-lite [OPERATION] [FILENAME]" << endl;
+        return 0;
+    }
+
+
 }
