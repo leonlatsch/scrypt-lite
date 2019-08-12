@@ -1,15 +1,16 @@
 // main.cpp / This file contains the main() method
 
+#include <sys/stat.h>
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
 int METHOD; // Either 0 (encryption) or 1 (decryption)
 string FILENAME;
 
-void greeting()
-{
+void greeting() {
     const char *breakLine = "############################################\n";
 
     const char* line0 = " ____     ____                          _\n";
@@ -32,25 +33,33 @@ void greeting()
     cout << endl;
 }
 
-int error(int code, string const &message) {
-    cerr << message << endl;
-    return code;
+void info(string const message) {
+    cout << "[INFO] " << message << endl;
 }
 
-int main(int argc, char** argv)
-{
+int error(int code, string const &message) {
+    cerr << "[ERROR] " << message << endl;
+    exit(code);
+}
+
+inline bool exists(const string& file) {
+    struct stat buffer;
+    return (stat (file.c_str(), &buffer) == 0);
+}
+
+int main(int argc, char** argv) {
     // Print a ASCII Logo
     greeting();
 
     // Exit on wrong usage
     if (argc < 3) {
-        cerr << "Usage: scrypt-lite [OPERATION] [FILENAME]" << endl;
+        info("Usage: scrypt-lite [OPERATION] [FILENAME]");
         return 0;
     }
 
     // Read arguments
-    const char* method = argv[1];
-    const char* filename = argv[2];
+    string method = argv[1];
+    string filename = argv[2];
 
     // Set method or exit
     if (method == "-e" || method == "--encrypt") {
@@ -58,8 +67,24 @@ int main(int argc, char** argv)
     } else if (method == "-d" || method == "--decrypt") {
         METHOD = 1;
     } else {
-        return error(1, "Invalid method");
+        error(1, "Invalid method");
     }
 
     FILENAME = filename;
+
+    // Display mode message
+    string modeMessage = "Mode: ";
+    if (METHOD == 0) {
+        modeMessage += "Encryption";
+    } else {
+        modeMessage += "Decryption";
+    }
+
+    info(modeMessage);
+    info("File: " + FILENAME);
+    info("");
+
+    if (!exists(FILENAME)) {
+        error(1, "File does not exist");
+    }
 }
