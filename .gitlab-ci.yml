@@ -1,0 +1,18 @@
+image: ubuntu:bionic
+
+cache:
+  key: apt-cache
+  paths:
+    - apt-cache/
+
+before_script:
+  - apt update
+  - apt install g++ -y
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - ./build.sh
