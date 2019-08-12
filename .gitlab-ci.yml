@@ -16,3 +16,6 @@ build:
   stage: build
   script:
     - ./build.sh
+  artifacts:
+    paths:
+      - build/scrypt-lite
