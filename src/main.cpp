@@ -35,11 +35,11 @@ void greeting() {
 }
 
 void info(string const message) {
-    cout << "[INFO] " << message << endl;
+    cout << "[" << "\033[1;36mINFO\033[0m" << "] " << message << endl;
 }
 
 int error(int code, string const &message) {
-    cerr << "[ERROR] " << message << endl;
+    cerr << "[" << "\033[1;31mERROR\033[0m"  <<"] " << message << endl;
     exit(code);
 }
 
