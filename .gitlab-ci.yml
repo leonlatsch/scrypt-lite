@@ -3,7 +3,7 @@ image: ubuntu:bionic
 cache:
   key: apt-cache
   paths:
-    -apt-cache/
+    - apt-cache/
 
 before_script:
   - apt update
