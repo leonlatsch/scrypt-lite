@@ -1,15 +1,23 @@
 // main.cpp / This file contains the main() method
 
+#include <sys/stat.h>
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <termios.h>
+#include <unistd.h>
 
 using namespace std;
 
 int METHOD; // Either 0 (encryption) or 1 (decryption)
-string FILENAME;
+string FILENAME; // The name of the source file
+string EXTENSION; // Extension for the output file
+fstream IN; // Input stream
+fstream OUT; // Putput stream
+string PASSWORD; // Password used for key generatiron
+string EMPTY;
 
-void greeting()
-{
+void greeting() {
     const char *breakLine = "############################################\n";
 
     const char* line0 = " ____     ____                          _\n";
@@ -32,25 +40,59 @@ void greeting()
     cout << endl;
 }
 
-int error(int code, string const &message) {
-    cerr << message << endl;
-    return code;
+void setStdinEcho(bool enable = true) {
+    struct termios tty;
+    tcgetattr(STDIN_FILENO, &tty);
+    if( !enable )
+        tty.c_lflag &= ~ECHO;
+    else
+        tty.c_lflag |= ECHO;
+
+    (void) tcsetattr(STDIN_FILENO, TCSANOW, &tty);
 }
 
-int main(int argc, char** argv)
-{
-    // Print a ASCII Logo
-    greeting();
+string read(string message, bool withEcho = true) {
+    cout << "[" << "\033[1;32mREAD\033[0m" << "] " << message;
+    setStdinEcho(false);
+    string passwd;
+    cin >> passwd;
+    setStdinEcho(true);
+    cout << endl;
+    return passwd;
+}
+
+void info(string const message) {
+    cout << "[" << "\033[1;36mINFO\033[0m" << "] " << message << endl;
+}
+
+void error(string const &message) {
+    cerr << "[" << "\033[1;31mERROR\033[0m"  <<"] " << message << endl;
+}
+
+void initialize() {
+    EXTENSION = ".crypt";
+    EMPTY = "";
+}
+
+inline bool exists(const string& file) {
+    struct stat buffer;
+    return (stat (file.c_str(), &buffer) == 0);
+}
+
+int main(int argc, char** argv) {
+    initialize();
+
+    greeting(); // Print a ASCII Logo
 
     // Exit on wrong usage
     if (argc < 3) {
-        cerr << "Usage: scrypt-lite [OPERATION] [FILENAME]" << endl;
+        info("Usage: scrypt-lite [OPERATION] [FILENAME]");
         return 0;
     }
 
     // Read arguments
-    const char* method = argv[1];
-    const char* filename = argv[2];
+    string method = argv[1];
+    string filename = argv[2];
 
     // Set method or exit
     if (method == "-e" || method == "--encrypt") {
@@ -58,8 +100,31 @@ int main(int argc, char** argv)
     } else if (method == "-d" || method == "--decrypt") {
         METHOD = 1;
     } else {
-        return error(1, "Invalid method");
+        error("Invalid method");
+        exit(1);
     }
 
     FILENAME = filename;
+
+    // Display mode message
+    string modeMessage = "Mode: ";
+    if (METHOD == 0) {
+        modeMessage += "Encryption";
+    } else {
+        modeMessage += "Decryption";
+    }
+
+    info(modeMessage);
+    info("File: " + FILENAME);
+    info("Output: " + FILENAME + EXTENSION);
+    info(EMPTY);
+
+    if (!exists(FILENAME)) {
+        error("File does not exist");
+        exit(1);
+    }
+
+    info(EMPTY);
+    string password = read("Enter a password: ", false);
+    info(EMPTY);
 }
