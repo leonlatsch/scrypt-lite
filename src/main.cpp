@@ -4,12 +4,17 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <termios.h>
+#include <unistd.h>
 
 using namespace std;
 
 int METHOD; // Either 0 (encryption) or 1 (decryption)
 string FILENAME; // The name of the source file
 string EXTENSION; // Extension for the output file
+fstream IN; // Input stream
+fstream OUT; // Putput stream
+string PASSWORD; // Password used for key generatiron
 
 void greeting() {
     const char *breakLine = "############################################\n";
@@ -32,6 +37,27 @@ void greeting() {
     cout << endl;
     cout << breakLine;
     cout << endl;
+}
+
+void setStdinEcho(bool enable = true) {
+    struct termios tty;
+    tcgetattr(STDIN_FILENO, &tty);
+    if( !enable )
+        tty.c_lflag &= ~ECHO;
+    else
+        tty.c_lflag |= ECHO;
+
+    (void) tcsetattr(STDIN_FILENO, TCSANOW, &tty);
+}
+
+string read(string message, bool withEcho = true) {
+    cout << "[" << "\033[1;32mREAD\033[0m" << "] " << message;
+    setStdinEcho(false);
+    string passwd;
+    cin >> passwd;
+    setStdinEcho(true);
+    cout << endl;
+    return passwd;
 }
 
 void info(string const message) {
@@ -93,4 +119,8 @@ int main(int argc, char** argv) {
     if (!exists(FILENAME)) {
         error(1, "File does not exist");
     }
+
+    info("");
+    string password = read("Enter a password: ", false);
+    info("");
 }
