@@ -15,6 +15,7 @@ string EXTENSION; // Extension for the output file
 fstream IN; // Input stream
 fstream OUT; // Putput stream
 string PASSWORD; // Password used for key generatiron
+string EMPTY;
 
 void greeting() {
     const char *breakLine = "############################################\n";
@@ -64,13 +65,13 @@ void info(string const message) {
     cout << "[" << "\033[1;36mINFO\033[0m" << "] " << message << endl;
 }
 
-int error(int code, string const &message) {
+void error(string const &message) {
     cerr << "[" << "\033[1;31mERROR\033[0m"  <<"] " << message << endl;
-    exit(code);
 }
 
 void initialize() {
     EXTENSION = ".crypt";
+    EMPTY = "";
 }
 
 inline bool exists(const string& file) {
@@ -99,7 +100,8 @@ int main(int argc, char** argv) {
     } else if (method == "-d" || method == "--decrypt") {
         METHOD = 1;
     } else {
-        error(1, "Invalid method");
+        error("Invalid method");
+        exit(1);
     }
 
     FILENAME = filename;
@@ -114,13 +116,15 @@ int main(int argc, char** argv) {
 
     info(modeMessage);
     info("File: " + FILENAME);
-    info("");
+    info("Output: " + FILENAME + EXTENSION);
+    info(EMPTY);
 
     if (!exists(FILENAME)) {
-        error(1, "File does not exist");
+        error("File does not exist");
+        exit(1);
     }
 
-    info("");
+    info(EMPTY);
     string password = read("Enter a password: ", false);
-    info("");
+    info(EMPTY);
 }
