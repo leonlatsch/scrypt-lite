@@ -18,4 +18,4 @@ build:
     - ./build.sh
   artifacts:
     paths:
-      - build/scrypt-lite
+      - bin/scrypt-lite
