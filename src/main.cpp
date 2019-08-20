@@ -85,6 +85,11 @@ inline bool exists(const string& file) {
     return (stat (file.c_str(), &buffer) == 0);
 }
 
+void cleanup() {
+    IN.close();
+    OUT.close();
+}
+
 int main(int argc, char** argv) {
     initialize();
 
@@ -130,7 +135,16 @@ int main(int argc, char** argv) {
         exit(1);
     }
 
+    IN.open(FILENAME);
+
+    if (!IN.is_open()) {
+        error("Could not open file: " + FILENAME);
+        exit(1);
+    }
+
     info(EMPTY);
-    string password = read("Enter a password: ", false);
+    PASSWORD = read("Enter a password: ", false);
     info(EMPTY);
+
+    cleanup();
 }
