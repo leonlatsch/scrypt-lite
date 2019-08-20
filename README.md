@@ -20,7 +20,7 @@ At the moment scrypt-lite is not ready to release. If you want to use/test it, y
 
 - linux
 - git
-- g++
+- g++ (8.3.0)
 
 
 
