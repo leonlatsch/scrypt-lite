@@ -1,4 +1,10 @@
-// main.cpp / This file contains the main() method
+// main.cpp
+
+/*
+    MIT License
+
+    Copyright (c) 2019 Leon Latsch
+*/
 
 #include <sys/stat.h>
 #include <iostream>
