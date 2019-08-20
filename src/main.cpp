@@ -12,7 +12,9 @@
 #include <fstream>
 #include <termios.h>
 #include <unistd.h>
+
 #include "hash.h"
+#include "common.h"
 
 using namespace std;
 
@@ -68,13 +70,7 @@ string read(string message, bool withEcho = true) {
     return passwd;
 }
 
-void info(string const message) {
-    cout << "[" << "\033[1;36mINFO\033[0m" << "] " << message << endl;
-}
 
-void error(string const &message) {
-    cerr << "[" << "\033[1;31mERROR\033[0m"  <<"] " << message << endl;
-}
 
 void initialize() {
     EXTENSION = ".crypt";
