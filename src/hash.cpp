@@ -1,3 +1,11 @@
+// hash.cpp / scrypt-lite
+
+/*
+    MIT License
+
+    Copyright (c) 2019 Leon Latsch
+*/
+
 #include <string>
 #include "lib/picosha2.h"
 
