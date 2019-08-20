@@ -2,5 +2,5 @@
 
 echo -n "[*] Building scrypt-lite... "
 mkdir -p bin
-g++ src/main.cpp -o bin/scrypt-lite
+g++ src/*.cpp -o bin/scrypt-lite
 echo "Done"

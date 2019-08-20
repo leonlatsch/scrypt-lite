@@ -12,6 +12,7 @@
 #include <fstream>
 #include <termios.h>
 #include <unistd.h>
+#include "hash.h"
 
 using namespace std;
 
@@ -143,7 +144,7 @@ int main(int argc, char** argv) {
     }
 
     info(EMPTY);
-    PASSWORD = read("Enter a password: ", false);
+    PASSWORD = sha256Hash(read("Enter a password: ", false));
     info(EMPTY);
 
     cleanup();
