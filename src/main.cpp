@@ -6,18 +6,15 @@
     Copyright (c) 2019 Leon Latsch
 */
 
-#include <fstream>
-
 #include "hash.h"
 #include "common.h"
+#include "crypt.h"
 
 using namespace std;
 
 int METHOD; // Either 0 (encryption) or 1 (decryption)
 string FILENAME; // The name of the source file
 string EXTENSION; // Extension for the output file
-ifstream IN; // Input stream
-ofstream OUT; // Putput stream
 string PASSWORD; // Password used for key generatiron
 string EMPTY; // EMPTY STRING
 
@@ -48,11 +45,6 @@ void greeting() {
 void initialize() {
     EXTENSION = ".crypt";
     EMPTY = "";
-}
-
-void cleanup() {
-    IN.close();
-    OUT.close();
 }
 
 int main(int argc, char** argv) {
@@ -100,16 +92,13 @@ int main(int argc, char** argv) {
         exit(1);
     }
 
-    IN.open(FILENAME);
-
-    if (!IN.is_open()) {
-        error("Could not open file: " + FILENAME);
-        exit(1);
-    }
-
     info(EMPTY);
     PASSWORD = sha256Hash(read("Enter a password: ", false));
     info(EMPTY);
 
-    cleanup();
+    if (METHOD == 0) {
+        //encrypt();
+    } else {
+        //decrypt():
+    }
 }
