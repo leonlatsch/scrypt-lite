@@ -95,10 +95,29 @@ int main(int argc, char** argv) {
     info(EMPTY);
     PASSWORD = sha256Hash(read("Enter a password: ", false));
     info(EMPTY);
+    vector<unsigned char> raw_key(PASSWORD.begin(), PASSWORD.end());
 
     if (METHOD == 0) {
-        //encrypt();
+        info("Encrypting...");
+        int result = encrypt(FILENAME, FILENAME + EXTENSION, raw_key);
+
+        if (result != 0) {
+            error("Could not encrypt: " + FILENAME);
+            exit(1);
+        } else {
+            info("Done");
+        }
     } else {
-        //decrypt():
+        info("Decrypting...");
+        string file_name_buffer;
+        replace(FILENAME, EXTENSION, EMPTY);
+        int result = decrypt(FILENAME, file_name_buffer, raw_key);
+
+        if (result != 0)  {
+            error("Could not decrypt: " + FILENAME);
+            exit(1);
+        } else {
+            info("Done");
+        }
     }
 }

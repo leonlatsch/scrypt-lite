@@ -1,4 +1,5 @@
 // crypt.cüü / scrypt-lite
+// Inspired by https://github.com/Urban82/Aes256/blob/master/utils/encrypt.cpp due to no documentation
 
 /*
     MIT License
@@ -42,7 +43,32 @@ int encrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
         return 1;
     }
 
-    //TODO
+    Aes256 aes(key);
+
+    fseeko64(in, 0, SEEK_END);
+    file_len = ftell(in);
+    fseeko64(in, 0, SEEK_SET);
+
+    enc.clear();
+    aes.encrypt_start(file_len, enc);
+    fwrite(enc.data(), enc.size(), 1, out);
+
+    while (!feof(in)) {
+        unsigned char buffer[BUFFER_SIZE];
+        size_t buffer_len;
+
+        buffer_len = fread(buffer, 1, BUFFER_SIZE, in);
+        if(buffer_len > 0) {
+            enc.clear();
+            aes.encrypt_continue(buffer, buffer_len, enc);
+            fwrite(enc.data(), enc.size(), 1, out);
+        }
+    }
+
+    enc.clear();
+    aes.encrypt_end(enc);
+    fwrite(enc.data(), enc.size(), 1, out);
+
     fclose(in);
     fclose(out);
 
@@ -50,5 +76,6 @@ int encrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
 }
 
 int decrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
+    //TODO
     return 0;
 }
