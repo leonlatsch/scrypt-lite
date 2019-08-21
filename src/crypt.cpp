@@ -49,6 +49,6 @@ int encrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
    return 0; 
 }
 
-int decrypt(string filename, string extension, vector<unsigned char> vector_key) {
+int decrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
     return 0;
 }

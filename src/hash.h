@@ -8,4 +8,7 @@
 
 #include <string>
 
+/**
+ * Hash a string with SHA-256
+ */
 std::string sha256Hash(std::string str);
