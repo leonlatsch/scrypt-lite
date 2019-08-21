@@ -1,4 +1,4 @@
-// crypt.cüü / scrypt-lite
+// crypt.cpp / scrypt-lite
 // Inspired by https://github.com/Urban82/Aes256/blob/master/utils/ due to no documentation
 
 /*
