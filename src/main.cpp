@@ -6,12 +6,7 @@
     Copyright (c) 2019 Leon Latsch
 */
 
-#include <sys/stat.h>
-#include <iostream>
-#include <string>
 #include <fstream>
-#include <termios.h>
-#include <unistd.h>
 
 #include "hash.h"
 #include "common.h"
@@ -21,10 +16,10 @@ using namespace std;
 int METHOD; // Either 0 (encryption) or 1 (decryption)
 string FILENAME; // The name of the source file
 string EXTENSION; // Extension for the output file
-fstream IN; // Input stream
-fstream OUT; // Putput stream
+ifstream IN; // Input stream
+ofstream OUT; // Putput stream
 string PASSWORD; // Password used for key generatiron
-string EMPTY;
+string EMPTY; // EMPTY STRING
 
 void greeting() {
     const char *breakLine = "############################################\n";
@@ -49,37 +44,10 @@ void greeting() {
     cout << endl;
 }
 
-void setStdinEcho(bool enable = true) {
-    struct termios tty;
-    tcgetattr(STDIN_FILENO, &tty);
-    if( !enable )
-        tty.c_lflag &= ~ECHO;
-    else
-        tty.c_lflag |= ECHO;
-
-    (void) tcsetattr(STDIN_FILENO, TCSANOW, &tty);
-}
-
-string read(string message, bool withEcho = true) {
-    cout << "[" << "\033[1;32mREAD\033[0m" << "] " << message;
-    setStdinEcho(false);
-    string passwd;
-    cin >> passwd;
-    setStdinEcho(true);
-    cout << endl;
-    return passwd;
-}
-
-
 
 void initialize() {
     EXTENSION = ".crypt";
     EMPTY = "";
-}
-
-inline bool exists(const string& file) {
-    struct stat buffer;
-    return (stat (file.c_str(), &buffer) == 0);
 }
 
 void cleanup() {
