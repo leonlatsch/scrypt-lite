@@ -104,7 +104,6 @@ int main(int argc, char** argv) {
         exit(1);
     }
 
-    info(EMPTY);
     PASSWORD = sha256Hash(read("Enter a password: ", false));
     info(EMPTY);
     vector<unsigned char> raw_key(PASSWORD.begin(), PASSWORD.end());
