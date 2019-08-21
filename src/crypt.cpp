@@ -1,5 +1,5 @@
 // crypt.cüü / scrypt-lite
-// Inspired by https://github.com/Urban82/Aes256/blob/master/utils/encrypt.cpp due to no documentation
+// Inspired by https://github.com/Urban82/Aes256/blob/master/utils/ due to no documentation
 
 /*
     MIT License
@@ -76,6 +76,52 @@ int encrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
 }
 
 int decrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
-    //TODO
+    ByteArray key, dec;
+    size_t file_len, key_len = 0;
+
+    FILE *in, *out;
+
+    srand(time(0));
+
+    while (vector_key[key_len] != 0) {
+        key.push_back(vector_key[key_len++]);
+    }
+
+    in = fopen(in_file.c_str(), "rb");
+    if (in == 0) {
+        return 1;
+    }
+
+    out = fopen(out_file.c_str(), "wb");
+    if (out == 0) {
+        return 1;
+    }
+
+    Aes256 aes(key);
+
+    fseeko64(in, 0, SEEK_END);
+    file_len = ftell(in);
+    fseeko64(in, 0, SEEK_SET);
+
+    aes.decrypt_start(file_len);
+    while (!feof(in)) {
+        unsigned char buffer[BUFFER_SIZE];
+        size_t buffer_len;
+
+        buffer_len = fread(buffer, 1, BUFFER_SIZE, in);
+        if(buffer_len > 0)  {
+            dec.clear();
+            aes.decrypt_continue(buffer, buffer_len, dec);
+            fwrite(dec.data(), dec.size(), 1, out);
+        }
+    }
+
+    dec.clear();
+    aes.decrypt_end(dec);
+    fwrite(dec.data(), dec.size(), 1, out);
+
+    fclose(in);
+    fclose(out);
+
     return 0;
 }

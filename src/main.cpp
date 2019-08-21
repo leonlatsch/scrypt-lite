@@ -13,7 +13,8 @@
 using namespace std;
 
 int METHOD; // Either 0 (encryption) or 1 (decryption)
-string FILENAME; // The name of the source file
+string FILENAME_IN;  // The name of the source file
+string FILENAME_OUT; // The name if the dest file
 string EXTENSION; // Extension for the output file
 string PASSWORD; // Password used for key generatiron
 string EMPTY; // EMPTY STRING
@@ -47,6 +48,17 @@ void initialize() {
     EMPTY = "";
 }
 
+void gen_files(string filename) {
+    if (METHOD == 0 ) {
+         FILENAME_IN = filename;
+         FILENAME_OUT = filename + EXTENSION;
+    } else {
+        FILENAME_IN = filename;
+        replace(filename, EXTENSION, EMPTY);
+        FILENAME_OUT = filename;
+    }
+}
+
 int main(int argc, char** argv) {
     initialize();
 
@@ -72,7 +84,7 @@ int main(int argc, char** argv) {
         exit(1);
     }
 
-    FILENAME = filename;
+    gen_files(filename);
 
     // Display mode message
     string modeMessage = "Mode: ";
@@ -83,11 +95,11 @@ int main(int argc, char** argv) {
     }
 
     info(modeMessage);
-    info("File: " + FILENAME);
-    info("Output: " + FILENAME + EXTENSION);
+    info("Input: " + FILENAME_IN);
+    info("Output: " + FILENAME_OUT);
     info(EMPTY);
 
-    if (!exists(FILENAME)) {
+    if (!exists(FILENAME_IN)) {
         error("File does not exist");
         exit(1);
     }
@@ -99,22 +111,20 @@ int main(int argc, char** argv) {
 
     if (METHOD == 0) {
         info("Encrypting...");
-        int result = encrypt(FILENAME, FILENAME + EXTENSION, raw_key);
+        int result = encrypt(FILENAME_IN, FILENAME_OUT, raw_key);
 
         if (result != 0) {
-            error("Could not encrypt: " + FILENAME);
+            error("Could not encrypt: " + FILENAME_IN);
             exit(1);
         } else {
             info("Done");
         }
     } else {
         info("Decrypting...");
-        string file_name_buffer;
-        replace(FILENAME, EXTENSION, EMPTY);
-        int result = decrypt(FILENAME, file_name_buffer, raw_key);
+        int result = decrypt(FILENAME_IN, FILENAME_OUT, raw_key);
 
         if (result != 0)  {
-            error("Could not decrypt: " + FILENAME);
+            error("Could not decrypt: " + FILENAME_IN);
             exit(1);
         } else {
             info("Done");
