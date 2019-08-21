@@ -9,6 +9,8 @@
 #include <string>
 #include <vector>
 
+#include "lib/aes256/aes256.hpp"
+
 using namespace std;
 
 void encrypt(string filename, string extension, vector<char> key) {
