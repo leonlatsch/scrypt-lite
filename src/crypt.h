@@ -11,6 +11,6 @@
 
 using namespace std;
 
-void encrypt(string filename, string extension, vector<char> key);
+int encrypt(string in_file, string out_file, vector<unsigned char> vector_key);
 
-void decrypt(string filename, string extension, vector<char> key);
+int decrypt(string filename, string extension, vector<unsigned char> vector_key);
