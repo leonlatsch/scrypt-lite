@@ -1,4 +1,10 @@
-// progressbar.h / scrypt-lite
+/**
+ * scrypt-lite
+ * progressbar.h
+ * 
+ * @autor Leon Latsch
+ * @version 1.0
+ */
 
 /*
     MIT License

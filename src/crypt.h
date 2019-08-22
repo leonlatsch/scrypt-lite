@@ -1,4 +1,10 @@
-// crypt.h / scrypt-lite
+/**
+ * scrypt-lite
+ * crypt.h
+ * 
+ * @autor Leon Latsch
+ * @version 1.0
+ */
 
 /*
     MIT License

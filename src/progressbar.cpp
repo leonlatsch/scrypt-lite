@@ -1,4 +1,10 @@
-// progressbar.cpp / scrypt-lite
+/**
+ * scrypt-lite
+ * progressbar.cpp
+ * 
+ * @autor Leon Latsch
+ * @version 1.0
+ */
 
 /*
     MIT License

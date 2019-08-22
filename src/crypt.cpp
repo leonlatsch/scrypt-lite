@@ -1,5 +1,12 @@
-// crypt.cpp / scrypt-lite
-// Inspired by https://github.com/Urban82/Aes256/blob/master/utils/ due to no documentation
+/**
+ * scrypt-lite
+ * crypt.cpp
+ * 
+ * @see https://github.com/Urban82/Aes256/blob/master/utils/
+ * 
+ * @autor Leon Latsch
+ * @version 1.0
+ */
 
 /*
     MIT License

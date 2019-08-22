@@ -1,4 +1,10 @@
-// hash.cpp / scrypt-lite
+/**
+ * scrypt-lite
+ * hash.cpp
+ * 
+ * @autor Leon Latsch
+ * @version 1.0
+ */
 
 /*
     MIT License

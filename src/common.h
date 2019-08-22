@@ -1,4 +1,10 @@
-// commons.h / scrypt-lite
+/**
+ * scrypt-lite
+ * common.h
+ * 
+ * @autor Leon Latsch
+ * @version 1.0
+ */
 
 /*
     MIT License

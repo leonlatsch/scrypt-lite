@@ -1,4 +1,10 @@
-// main.cpp / scrypt-lite
+/**
+ * scrypt-lite
+ * main.cpp
+ * 
+ * @autor Leon Latsch
+ * @version 1.0
+ */
 
 /*
     MIT License
