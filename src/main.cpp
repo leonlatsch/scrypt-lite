@@ -113,6 +113,8 @@ int main(int argc, char** argv) {
         exit(1);
     }
 
+    info("Size: " + getFileSize(FILENAME_IN));
+
     string password = "a";
 
     if (METHOD == 0) {

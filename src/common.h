@@ -50,6 +50,13 @@ bool exists(const std::string& file);
 bool endsWith (std::string const &fullString, std::string const &ending);
 
 /**
+ * Get a files size as formatted string
+ * 
+ * @return the files size as formatted string
+ */
+string getFileSize(std::string &filename);
+
+/**
  * En/disables the echo of stdin
  * Used for password input
  */
