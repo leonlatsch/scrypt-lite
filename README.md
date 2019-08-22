@@ -4,6 +4,10 @@
 
 ----
 
+![scrypt-lite](/uploads/d9981d2740c931b2764c05fb31057a44/scrypt.png)
+
+----
+
 ### Getting started
 
 At the moment scrypt-lite is not ready to release. If you want to use/test it, you have ti build it yourself.
