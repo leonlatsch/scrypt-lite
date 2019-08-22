@@ -28,26 +28,26 @@
 
 using namespace std;
 
-int encrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
+int encrypt(string inFile, string outFile, vector<unsigned char> vectorKey) {
     ByteArray key, enc;
-    size_t file_len, key_len = 0; // In bytes
+    size_t fileLength, keyLength = 0; // In bytes
 
     FILE *in, *out;
 
     srand(time(0));
 
     // Convert key
-    while (vector_key[key_len] != 0) {
-        key.push_back(vector_key[key_len++]);
+    while (vectorKey[keyLength] != 0) {
+        key.push_back(vectorKey[keyLength++]);
     }
 
     // Read files
-    in = fopen(in_file.c_str(), "rb");
+    in = fopen(inFile.c_str(), "rb");
     if (in == 0) {
         return 1;
     }
 
-    out = fopen(out_file.c_str(), "wb");
+    out = fopen(outFile.c_str(), "wb");
     if (out == 0) {
         return 1;
     }
@@ -55,27 +55,27 @@ int encrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
     Aes256 aes(key);
 
     fseeko64(in, 0, SEEK_END);
-    file_len = ftell(in);
+    fileLength = ftell(in);
     fseeko64(in, 0, SEEK_SET);
 
     enc.clear();
-    aes.encrypt_start(file_len, enc);
+    aes.encrypt_start(fileLength, enc);
     fwrite(enc.data(), enc.size(), 1, out);
 
     double processed;
 
     while (!feof(in)) {
         unsigned char buffer[BUFFER_SIZE];
-        size_t buffer_len;
+        size_t bufferLength;
 
-        buffer_len = fread(buffer, 1, BUFFER_SIZE, in);
-        if(buffer_len > 0) {
+        bufferLength = fread(buffer, 1, BUFFER_SIZE, in);
+        if(bufferLength > 0) {
             enc.clear();
-            aes.encrypt_continue(buffer, buffer_len, enc);
+            aes.encrypt_continue(buffer, bufferLength, enc);
             fwrite(enc.data(), enc.size(), 1, out);
         }
-        processed += buffer_len;
-        double p = (processed / file_len) * 100; // calculate percentage proccessed
+        processed += bufferLength;
+        double p = (processed / fileLength) * 100; // calculate percentage proccessed
         printProgress(p / 100); // show updated progress
         
     }
@@ -91,24 +91,24 @@ int encrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
    return 0; 
 }
 
-int decrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
+int decrypt(string inFile, string outFile, vector<unsigned char> vectorKey) {
     ByteArray key, dec;
-    size_t file_len, key_len = 0;
+    size_t fileLength, keyLength = 0;
 
     FILE *in, *out;
 
     srand(time(0));
 
-    while (vector_key[key_len] != 0) {
-        key.push_back(vector_key[key_len++]);
+    while (vectorKey[keyLength] != 0) {
+        key.push_back(vectorKey[keyLength++]);
     }
 
-    in = fopen(in_file.c_str(), "rb");
+    in = fopen(inFile.c_str(), "rb");
     if (in == 0) {
         return 1;
     }
 
-    out = fopen(out_file.c_str(), "wb");
+    out = fopen(outFile.c_str(), "wb");
     if (out == 0) {
         return 1;
     }
@@ -116,24 +116,24 @@ int decrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
     Aes256 aes(key);
 
     fseeko64(in, 0, SEEK_END);
-    file_len = ftell(in);
+    fileLength = ftell(in);
     fseeko64(in, 0, SEEK_SET);
 
-    aes.decrypt_start(file_len);
+    aes.decrypt_start(fileLength);
     double processed;
 
     while (!feof(in)) {
         unsigned char buffer[BUFFER_SIZE];
-        size_t buffer_len;
+        size_t bufferLength;
 
-        buffer_len = fread(buffer, 1, BUFFER_SIZE, in);
-        if(buffer_len > 0)  {
+        bufferLength = fread(buffer, 1, BUFFER_SIZE, in);
+        if(bufferLength > 0)  {
             dec.clear();
-            aes.decrypt_continue(buffer, buffer_len, dec);
+            aes.decrypt_continue(buffer, bufferLength, dec);
             fwrite(dec.data(), dec.size(), 1, out);
         }
-        processed += buffer_len;
-        double p = (processed / file_len) * 100; // calculate percentage proccessed
+        processed += bufferLength;
+        double p = (processed / fileLength) * 100; // calculate percentage proccessed
         printProgress(p / 100); // show updated progress
     }
     cout << endl;

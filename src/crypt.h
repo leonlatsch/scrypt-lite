@@ -31,7 +31,7 @@ using namespace std;
  * 
  * @return 0 if no errors occured
  */
-int encrypt(string in_file, string out_file, vector<unsigned char> vector_key);
+int encrypt(std::string inFile, std::string outFile, std::vector<unsigned char> vectorKey);
 
 /**
  * Decrypt a file with a key
@@ -42,4 +42,4 @@ int encrypt(string in_file, string out_file, vector<unsigned char> vector_key);
  * 
  * @return 0 if no errors occured
  */
-int decrypt(string in_file, string out_file, vector<unsigned char> vector_key);
+int decrypt(std::string inFile, std::string outFile, std::vector<unsigned char> vectorKey);

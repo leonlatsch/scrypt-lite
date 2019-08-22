@@ -18,7 +18,7 @@
 
 using namespace std;
 
-int METHOD; // Either 0 (encryption) or 1 (decryption)
+int MODE; // Either 0 (encryption) or 1 (decryption)
 string FILENAME_IN;  // The name of the source file
 string FILENAME_OUT; // The name if the dest file
 string EXTENSION; // Extension for the output file
@@ -54,8 +54,8 @@ void initialize() {
     EMPTY = "";
 }
 
-void gen_files(string filename) {
-    if (METHOD == 0 ) {
+void genFiles(string filename) {
+    if (MODE == 0 ) {
          FILENAME_IN = filename;
          FILENAME_OUT = filename + EXTENSION;
     } else {
@@ -80,24 +80,24 @@ int main(int argc, char** argv) {
     }
 
     // Read arguments
-    string method = argv[1];
+    string mode = argv[1];
     string filename = argv[2];
 
     // Set method or exit
-    if (method == "-e" || method == "--encrypt") {
-        METHOD = 0;
-    } else if (method == "-d" || method == "--decrypt") {
-        METHOD = 1;
+    if (mode == "-e" || mode == "--encrypt") {
+        MODE = 0;
+    } else if (mode == "-d" || mode == "--decrypt") {
+        MODE = 1;
     } else {
         error("Invalid method");
         exit(1);
     }
 
-    gen_files(filename);
+    genFiles(filename);
 
     // Display mode message
     string modeMessage = "Mode: ";
-    if (METHOD == 0) {
+    if (MODE == 0) {
         modeMessage += "Encryption";
     } else {
         modeMessage += "Decryption";
@@ -112,7 +112,7 @@ int main(int argc, char** argv) {
         exit(1);
     }
 
-    if (METHOD == 1 && !endsWith(FILENAME_IN, EXTENSION)) {
+    if (MODE == 1 && !endsWith(FILENAME_IN, EXTENSION)) {
         error(FILENAME_IN + " can't be decrypted");
         error("Look for the .crypt extension");
         exit(1);
@@ -123,7 +123,7 @@ int main(int argc, char** argv) {
 
     string password = "a";
 
-    if (METHOD == 0) {
+    if (MODE == 0) {
         string confirmPassword = "b";
 
         while (password != confirmPassword) {
@@ -140,11 +140,11 @@ int main(int argc, char** argv) {
     PASSWORD = password; // Save the password in global variable
 
     info(EMPTY);
-    vector<unsigned char> raw_key(PASSWORD.begin(), PASSWORD.end());
+    vector<unsigned char> rawKey(PASSWORD.begin(), PASSWORD.end());
 
-    if (METHOD == 0) {
+    if (MODE == 0) {
         info("Encrypting...");
-        int result = encrypt(FILENAME_IN, FILENAME_OUT, raw_key);
+        int result = encrypt(FILENAME_IN, FILENAME_OUT, rawKey);
 
         if (result != 0) {
             error("Could not encrypt: " + FILENAME_IN);
@@ -154,7 +154,7 @@ int main(int argc, char** argv) {
         }
     } else {
         info("Decrypting...");
-        int result = decrypt(FILENAME_IN, FILENAME_OUT, raw_key);
+        int result = decrypt(FILENAME_IN, FILENAME_OUT, rawKey);
 
         if (result != 0)  {
             error("Could not decrypt: " + FILENAME_IN);

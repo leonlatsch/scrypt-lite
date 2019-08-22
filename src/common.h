@@ -71,11 +71,11 @@ void setStdinEcho(bool enable = true);
 /**
  * Read a string from stdin
  */
-string read(string message, bool withEcho = true);
+string read(std::string message, bool withEcho = true);
 
 /**
  * Replace util
  * 
  * @return true, if no errors occur
  */
-bool replace(string& str, const string& from, const string& to);
+bool replace(std::string& str, const std::string& from, const std::string& to);

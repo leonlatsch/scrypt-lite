@@ -23,24 +23,24 @@
 
 using namespace std;
 
-void info(std::string const message) {
-    std::cout << "[" << "\033[1;36mINFO\033[0m" << "] " << message << std::endl;
+void info(string const message) {
+    cout << "[" << "\033[1;36mINFO\033[0m" << "] " << message << endl;
 }
 
-void error(std::string const &message) {
-    std::cerr << "[" << "\033[1;31mERROR\033[0m"  <<"] " << message << std::endl;
+void error(string const &message) {
+    cerr << "[" << "\033[1;31mERROR\033[0m"  <<"] " << message << endl;
 }
 
-void warn(std::string const &message) {
-    std::cout << "[" << "\033[1;33mWARN\033[0m" << "] " << message << std::endl;
+void warn(string const &message) {
+    cout << "[" << "\033[1;33mWARN\033[0m" << "] " << message << endl;
 }
 
-bool exists(const std::string& file) {
+bool exists(const string& file) {
     struct stat buffer;
     return (stat (file.c_str(), &buffer) == 0);
 }
 
-bool endsWith (std::string const &fullString, std::string const &ending) {
+bool endsWith (string const &fullString, string const &ending) {
     if (fullString.length() >= ending.length()) {
         return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
     } else {
@@ -48,7 +48,7 @@ bool endsWith (std::string const &fullString, std::string const &ending) {
     }
 }
 
-std::string getFileSize(std::string &filename) {
+string getFileSize(string &filename) {
     FILE *file = fopen(filename.c_str(), "rb");
     fseeko64(file, 0, SEEK_END);
     double file_len = ftell(file);
