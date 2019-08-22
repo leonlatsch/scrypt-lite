@@ -67,6 +67,9 @@ int main(int argc, char** argv) {
     // Exit on wrong usage
     if (argc < 3) {
         info("Usage: scrypt-lite [OPERATION] [FILENAME]");
+        info("Operations:");
+        info("    -e --encrypt | Encryption-Mode");
+        info("    -d --decrypt | Decryption-Mode");
         return 0;
     }
 
@@ -104,7 +107,25 @@ int main(int argc, char** argv) {
         exit(1);
     }
 
-    PASSWORD = sha256Hash(read("Enter a password: ", false));
+    if (METHOD == 1 && !endsWith(FILENAME_IN, EXTENSION)) {
+        error(FILENAME_IN + " can't be decrypted");
+        error("Look for the .crypt extension");
+        exit(1);
+    }
+
+    string password = "a";
+    string confirmPassword = "b";
+
+    while (password != confirmPassword) {
+        password = read("Enter a password: ", false);
+        confirmPassword = read("Confirm your password: ", false);
+        if (password != confirmPassword) {
+            warn("The password didn't equal. Try again");
+        }
+    }
+
+    PASSWORD = password; // Save the password in global variable
+
     info(EMPTY);
     vector<unsigned char> raw_key(PASSWORD.begin(), PASSWORD.end());
 

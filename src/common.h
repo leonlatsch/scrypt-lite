@@ -27,6 +27,13 @@ void info(std::string const message);
 void error(std::string const &message);
 
 /**
+ * Print a message with a [WARN] prefix
+ * 
+ * @param message the message to be printed
+ */
+void warn(std::string const &message);
+
+/**
  * Check wether a file does exist
  * 
  * @param file The filename of the file
@@ -34,6 +41,13 @@ void error(std::string const &message);
  * @return true, if the file exists
  */
 bool exists(const std::string& file);
+
+/**
+ * Checks wether a string end with a substring
+ * 
+ * @retrun true, if it does
+ */
+bool endsWith (std::string const &fullString, std::string const &ending);
 
 /**
  * En/disables the echo of stdin

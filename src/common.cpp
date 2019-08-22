@@ -23,11 +23,22 @@ void error(std::string const &message) {
     std::cerr << "[" << "\033[1;31mERROR\033[0m"  <<"] " << message << std::endl;
 }
 
+void warn(std::string const &message) {
+    std::cout << "[" << "\033[1;33mWARN\033[0m" << "] " << message << std::endl;
+}
+
 bool exists(const std::string& file) {
     struct stat buffer;
     return (stat (file.c_str(), &buffer) == 0);
 }
 
+bool endsWith (std::string const &fullString, std::string const &ending) {
+    if (fullString.length() >= ending.length()) {
+        return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
+    } else {
+        return false;
+    }
+}
 
 void setStdinEcho(bool enable = true) {
     struct termios tty;

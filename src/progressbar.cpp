@@ -17,6 +17,6 @@ void printProgress (double percentage) {
     int val = (int) (percentage * 100);
     int lpad = (int) (percentage * PBWIDTH);
     int rpad = PBWIDTH - lpad;
-    printf ("\r[\033[1;33mLOAD\033[0m]%3d%% [%.*s%*s]", val, lpad, PBSTR, rpad, "");
+    printf ("\r[\033[1;34mLOAD\033[0m]%3d%% [%.*s%*s]", val, lpad, PBSTR, rpad, "");
     fflush (stdout);
 }
