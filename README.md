@@ -10,9 +10,18 @@
 
 ### Getting started
 
-At the moment scrypt-lite is not ready to release. If you want to use/test it, you have ti build it yourself.
+**Either:**
 
-> Note: I do not recommend to use a self-built version of scrypt-lite on important files.
+1. Go to Tags
+2. Search for the newes version and download it
+3. Run it or move it to a directory that is included in $PATH
+4. Thats it
+
+**Or:**
+
+- Build it yourself as explained further on
+
+> Note: I do not recommend to use a self-built version of scrypt-lite.
 
 
 
