@@ -4,7 +4,7 @@
 
 ----
 
-![scrypt-lite](/uploads/d9981d2740c931b2764c05fb31057a44/scrypt.png)
+![scrypt-lite](/uploads/9ae2e6c411030ca3af9abe049081c09f/scrypt.png)
 
 ----
 
