@@ -113,6 +113,8 @@ int decrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
     fseeko64(in, 0, SEEK_SET);
 
     aes.decrypt_start(file_len);
+    double processed;
+
     while (!feof(in)) {
         unsigned char buffer[BUFFER_SIZE];
         size_t buffer_len;
@@ -123,7 +125,11 @@ int decrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
             aes.decrypt_continue(buffer, buffer_len, dec);
             fwrite(dec.data(), dec.size(), 1, out);
         }
+        processed += buffer_len;
+        double p = (processed / file_len) * 100; // calculate percentage proccessed
+        printProgress(p / 100); // show updated progress
     }
+    cout << endl;
 
     dec.clear();
     aes.decrypt_end(dec);

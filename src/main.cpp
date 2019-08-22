@@ -114,14 +114,19 @@ int main(int argc, char** argv) {
     }
 
     string password = "a";
-    string confirmPassword = "b";
 
-    while (password != confirmPassword) {
-        password = read("Enter a password: ", false);
-        confirmPassword = read("Confirm your password: ", false);
-        if (password != confirmPassword) {
-            warn("The password didn't equal. Try again");
+    if (METHOD == 0) {
+        string confirmPassword = "b";
+
+        while (password != confirmPassword) {
+            password = read("Enter a password: ", false);
+            confirmPassword = read("Confirm your password: ", false);
+            if (password != confirmPassword) {
+                warn("The password didn't equal. Try again");
+            }
         }
+    } else {
+        password = read("Enter a password: ", false);
     }
 
     PASSWORD = password; // Save the password in global variable
