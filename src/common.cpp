@@ -13,6 +13,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -44,7 +45,7 @@ bool endsWith (std::string const &fullString, std::string const &ending) {
 std::string getFileSize(std::string &filename) {
     FILE *file = fopen(filename.c_str(), "rb");
     fseeko64(file, 0, SEEK_END);
-    size_t file_len = ftell(file);
+    double file_len = ftell(file);
     fseeko64(file, 0, SEEK_SET);
     fclose(file);
     
@@ -53,15 +54,17 @@ std::string getFileSize(std::string &filename) {
     double gb = mb / 1024;
 
     ostringstream strs;
+    strs << fixed;
+    strs << setprecision(2);
 
-    if (gb > 1) {
-        strs << (int) gb;
+    if (gb >= 1) {
+        strs << gb;
         return strs.str() + "GB";
-    } else if (mb > 1) {
-        strs << (int) mb;
+    } else if (mb >= 1) {
+        strs << mb;
         return strs.str() + "MB";
-    } else if (kb > 1) {
-        strs << (int) kb;
+    } else if (kb >= 1) {
+        strs << kb;
         return strs.str() + "KB";
     } else {
         strs << file_len;

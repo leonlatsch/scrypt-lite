@@ -100,7 +100,6 @@ int main(int argc, char** argv) {
     info(modeMessage);
     info("Input: " + FILENAME_IN);
     info("Output: " + FILENAME_OUT);
-    info(EMPTY);
 
     if (!exists(FILENAME_IN)) {
         error("File does not exist");
@@ -114,6 +113,7 @@ int main(int argc, char** argv) {
     }
 
     info("Size: " + getFileSize(FILENAME_IN));
+    info(EMPTY);
 
     string password = "a";
 
