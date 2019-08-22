@@ -137,7 +137,7 @@ int main(int argc, char** argv) {
         password = read("Enter a password: ", false);
     }
 
-    PASSWORD = password; // Save the password in global variable
+    PASSWORD = sha256Hash(password); // Save the password hash in global variable
 
     info(EMPTY);
     vector<unsigned char> rawKey(PASSWORD.begin(), PASSWORD.end());
