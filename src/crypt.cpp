@@ -14,6 +14,7 @@
 #include <vector>
 
 #include "lib/aes256/aes256.hpp"
+#include "progressbar.h"
 
 #define BUFFER_SIZE 1024*1024
 
