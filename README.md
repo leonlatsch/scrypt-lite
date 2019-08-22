@@ -4,7 +4,7 @@
 
 ----
 
-![scrypt-lite](/uploads/9ae2e6c411030ca3af9abe049081c09f/scrypt.png)
+![scrypt-lite](/uploads/215dd1b2476cb4314d1d308ec9615907/scrypt.png)
 
 ----
 
@@ -39,7 +39,8 @@
 
 **Building:**
 
-Just run the `build.sh` file in the repository root. If everything succeeds you will find the binary in the `bin/` directory. You can move it to `/bin` or `/sbin` or somewhere else to use it from terminal just like `ls` or `cd`.
+- Clone the repository
+- Run the `build.sh` file in the repository root. If everything succeeds you will find the binary in the `bin/` directory. You can move it to `/bin` or `/sbin` or somewhere else to use it from terminal just like `ls` or `cd`.
 
 Licence
 =======
