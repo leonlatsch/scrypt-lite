@@ -14,6 +14,8 @@ stages:
 
 build:
   stage: build
+  only:
+    - master
   script:
     - ./build.sh
   artifacts:

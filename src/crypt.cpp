@@ -7,6 +7,7 @@
     Copyright (c) 2019 Leon Latsch
 */
 
+#include <iostream>
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,6 +15,7 @@
 #include <vector>
 
 #include "lib/aes256/aes256.hpp"
+#include "progressbar.h"
 
 #define BUFFER_SIZE 1024*1024
 
@@ -21,7 +23,7 @@ using namespace std;
 
 int encrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
     ByteArray key, enc;
-    size_t file_len, key_len = 0;
+    size_t file_len, key_len = 0; // In bytes
 
     FILE *in, *out;
 
@@ -53,6 +55,8 @@ int encrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
     aes.encrypt_start(file_len, enc);
     fwrite(enc.data(), enc.size(), 1, out);
 
+    double processed;
+
     while (!feof(in)) {
         unsigned char buffer[BUFFER_SIZE];
         size_t buffer_len;
@@ -63,7 +67,12 @@ int encrypt(string in_file, string out_file, vector<unsigned char> vector_key) {
             aes.encrypt_continue(buffer, buffer_len, enc);
             fwrite(enc.data(), enc.size(), 1, out);
         }
+        processed += buffer_len;
+        double p = (processed / file_len) * 100; // calculate percentage proccessed
+        printProgress(p / 100); // show updated progress
+        
     }
+    cout << endl;
 
     enc.clear();
     aes.encrypt_end(enc);
