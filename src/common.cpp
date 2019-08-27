@@ -23,7 +23,7 @@
 
 using namespace std;
 
-void info(string const message) {
+void info(string const &message) {
     cout << "[" << "\033[1;36mINFO\033[0m" << "] " << message << endl;
 }
 
@@ -35,7 +35,7 @@ void warn(string const &message) {
     cout << "[" << "\033[1;33mWARN\033[0m" << "] " << message << endl;
 }
 
-bool exists(const string& file) {
+bool exists(string const &file) {
     struct stat buffer;
     return (stat (file.c_str(), &buffer) == 0);
 }
@@ -99,7 +99,7 @@ string read(string message, bool withEcho = true) {
     return content;
 }
 
-bool replace(string& str, const string& from, const string& to) {
+bool replace(string &str, const string &from, const string &to) {
     size_t start_pos = str.find(from);
     if(start_pos == string::npos)
         return false;

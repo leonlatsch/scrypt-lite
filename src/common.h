@@ -23,7 +23,7 @@ using namespace std;
  * 
  * @param message the message to be printed
  */
-void info(std::string const message);
+void info(std::string const &message);
 
 /**
  * Print a message with a [ERROR] prefix
@@ -46,7 +46,7 @@ void warn(std::string const &message);
  * 
  * @return true, if the file exists
  */
-bool exists(const std::string& file);
+bool exists(std::string const &file);
 
 /**
  * Checks wether a string end with a substring
@@ -78,4 +78,4 @@ string read(std::string message, bool withEcho = true);
  * 
  * @return true, if no errors occur
  */
-bool replace(std::string& str, const std::string& from, const std::string& to);
+bool replace(std::string &str, const std::string &from, const std::string &to);
