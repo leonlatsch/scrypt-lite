@@ -3,7 +3,7 @@
  * common.h
  * 
  * @autor Leon Latsch
- * @version 1.0
+ * @version 1.1
  */
 
 /*
@@ -61,6 +61,11 @@ bool endsWith (std::string const &fullString, std::string const &ending);
  * @return the files size as formatted string
  */
 string getFileSize(std::string &filename);
+
+/**
+ * Get a files bytes
+ */
+int getFileBytes(string &filename);
 
 /**
  * En/disables the echo of stdin

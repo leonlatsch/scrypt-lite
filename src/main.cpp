@@ -3,7 +3,7 @@
  * main.cpp
  * 
  * @autor Leon Latsch
- * @version 1.0
+ * @version 1.1
  */
 
 /*
@@ -115,6 +115,11 @@ int main(int argc, char** argv) {
     if (MODE == 1 && !endsWith(FILENAME_IN, EXTENSION)) {
         error(FILENAME_IN + " can't be decrypted");
         error("Look for the .crypt extension");
+        exit(1);
+    }
+
+    if (getFileBytes(FILENAME_IN) < 1) {
+        error("File " + FILENAME_IN + " is empty");
         exit(1);
     }
 

@@ -3,7 +3,7 @@
  * common.cpp
  * 
  * @autor Leon Latsch
- * @version 1.0
+ * @version 1.1
  */
 
 /*
@@ -51,11 +51,11 @@ bool endsWith (string const &fullString, string const &ending) {
 string getFileSize(string &filename) {
     FILE *file = fopen(filename.c_str(), "rb");
     fseeko64(file, 0, SEEK_END);
-    double file_len = ftell(file);
+    double fileLen = ftell(file);
     fseeko64(file, 0, SEEK_SET);
     fclose(file);
     
-    double kb = file_len / 1024;
+    double kb = fileLen / 1024;
     double mb = kb / 1024;
     double gb = mb / 1024;
 
@@ -73,9 +73,19 @@ string getFileSize(string &filename) {
         strs << kb;
         return strs.str() + "KB";
     } else {
-        strs << file_len;
+        strs << fileLen;
         return strs.str() + "Bytes";
     }
+}
+
+int getFileBytes(string &filename) {
+    FILE *file = fopen(filename.c_str(), "rb");
+    fseeko64(file, 0, SEEK_END);
+    int fileLen = ftell(file);
+    fseeko64(file, 0, SEEK_SET);
+    fclose(file);
+
+    return fileLen;
 }
 
 void setStdinEcho(bool enable = true) {
