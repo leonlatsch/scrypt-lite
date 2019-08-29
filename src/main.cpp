@@ -24,6 +24,7 @@ string FILENAME_OUT; // The name if the dest file
 string EXTENSION; // Extension for the output file
 string PASSWORD; // Password used for key generatiron
 string EMPTY; // EMPTY STRING
+string VERSION;
 
 void greeting() {
     const char *breakLine = "############################################\n";
@@ -45,6 +46,7 @@ void greeting() {
     cout << line5;
     cout << endl;
     cout << breakLine;
+    cout << "V: " << VERSION << endl;
     cout << endl;
 }
 
@@ -52,6 +54,7 @@ void greeting() {
 void initialize() {
     EXTENSION = ".crypt";
     EMPTY = "";
+    VERSION = "DEV-1.1"; // Change this to version number on release
 }
 
 void genFiles(string filename) {
