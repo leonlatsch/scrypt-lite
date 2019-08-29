@@ -138,7 +138,7 @@ int main(int argc, char** argv) {
             password = read("Enter a password: ", false);
             confirmPassword = read("Confirm your password: ", false);
             if (password != confirmPassword) {
-                warn("The password didn't equal. Try again");
+                warn("The passwords didn't match. Try again");
             }
         }
     } else {
