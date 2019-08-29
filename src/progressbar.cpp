@@ -3,7 +3,7 @@
  * progressbar.cpp
  * 
  * @autor Leon Latsch
- * @version 1.0
+ * @version 1.1
  */
 
 /*
@@ -12,8 +12,8 @@
     Copyright (c) 2019 Leon Latsch
 */
 
-#define PBSTR "############################################################"
-#define PBWIDTH 60
+#define PBSTR "##################################################"
+#define PBWIDTH 50
 
 #include <cstdio>
 #include <thread>
