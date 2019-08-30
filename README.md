@@ -15,8 +15,8 @@
 1. Go to Tags
 2. Search for the newes version and download it
 3. Extract it
-4. Run it or move it to a directory that is included in $PATH
-5. Thats it
+4. Run it or run `install.sh`
+5. Thats it.
 
 **Or:**
 
