@@ -1,19 +1,12 @@
 # scrypt-lite
-
-[![pipeline status](https://gitlab.com/leonlatsch/scrypt-lite/badges/master/pipeline.svg)](https://gitlab.com/leonlatsch/scrypt-lite/commits/master)
-
-----
-
-![scrypt-lite](/uploads/215dd1b2476cb4314d1d308ec9615907/scrypt.png)
-
 ----
 
 ### Getting started
 
 **Either:**
 
-1. Go to Tags
-2. Search for the newes version and download it
+1. Go to Releases
+2. Search for the newest version and download it
 3. Extract it
 4. Run it or move it to a directory that is included in $PATH
 5. Thats it
