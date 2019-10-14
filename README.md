@@ -1,5 +1,4 @@
 # scrypt-lite
-----
 
 ### Getting started
 
@@ -8,7 +7,7 @@
 1. Go to Releases
 2. Search for the newest version and download it
 3. Extract it
-4. Run it or move it to a directory that is included in $PATH
+4. Run the binary or run `install.sh`
 5. Thats it
 
 **Or:**
@@ -19,20 +18,20 @@
 
 
 
-#### How to build
-
+### How to build
 
 
 **Requirements:**
 
 - linux
 - git
-- g++ (8.3.0)
+- g++
 
 
 
 **Building:**
 
+- Make sure you meet all the requirements
 - Clone the repository
 - Run the `build.sh` file in the repository root. If everything succeeds you will find the binary in the `bin/` directory. You can move it to `/bin` or `/sbin` or somewhere else to use it from terminal just like `ls` or `cd`.
 
