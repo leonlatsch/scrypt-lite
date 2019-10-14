@@ -3,7 +3,7 @@
  * main.cpp
  * 
  * @autor Leon Latsch
- * @version 1.1
+ * @version 1.2
  */
 
 /*
@@ -54,7 +54,7 @@ void greeting() {
 void initialize() {
     EXTENSION = ".crypt";
     EMPTY = "";
-    VERSION = "RELEASE-1.1"; // Change this to version number on release
+    VERSION = "RELEASE-1.2"; // Change this to version number on release
 }
 
 void genFiles(string filename) {
