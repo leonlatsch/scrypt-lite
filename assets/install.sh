@@ -15,4 +15,5 @@ chmod +x scrypt
 mv scrypt /usr/bin/
 rm install.sh
 echo "Done"
+echo ""
 echo "[*] Try it by typing 'scrypt' in your terminal"

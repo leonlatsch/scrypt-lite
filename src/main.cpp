@@ -3,7 +3,7 @@
  * main.cpp
  * 
  * @autor Leon Latsch
- * @version 1.2
+ * @version 2.0
  */
 
 /*
@@ -54,7 +54,7 @@ void greeting() {
 void initialize() {
     EXTENSION = ".crypt";
     EMPTY = "";
-    VERSION = "RELEASE-1.2"; // Change this to version number on release
+    VERSION = "RELEASE-2.0"; // Change this to version number on release
 }
 
 void genFiles(string filename) {
@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
 
     // Exit on wrong usage
     if (argc < 3) {
-        info("Usage: scrypt-lite [OPERATION] [FILENAME]");
+        info("Usage: scrypt [OPERATION] [FILENAME]");
         info("Operations:");
         info("    -e --encrypt | Encryption-Mode");
         info("    -d --decrypt | Decryption-Mode");
