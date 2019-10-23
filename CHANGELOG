@@ -1,0 +1,24 @@
+## RELEASE-2.0
+- Changed usage notice
+- Added changelog
+- prettify install script
+
+## RELEASE-1.2
+- Extended build script
+
+## RELEASE-1.1
+- Refactoring
+- Fixed bug with empty files
+- Version gets displayed
+- Change length of loading bar
+- Added install script
+
+## RELEASE-1.0
+- Refactoring
+- Display file size
+- Password validation
+- Better usage notice
+- small fixes
+
+## BETA-0-1 [PRE-RELEASE]
+- First release

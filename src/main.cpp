@@ -54,7 +54,7 @@ void greeting() {
 void initialize() {
     EXTENSION = ".crypt";
     EMPTY = "";
-    VERSION = "RELEASE-2.0"; // Change this to version number on release
+    VERSION = "DEV-2.0"; // Change this to version number on release
 }
 
 void genFiles(string filename) {
