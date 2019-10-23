@@ -1,5 +1,10 @@
 # scrypt-lite
 
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/leonlatsch/scrypt-lite?include_prereleases&label=version&style=for-the-badge)
+![GitHub](https://img.shields.io/github/license/leonlatsch/scrypt-lite?style=for-the-badge)
+![GitHub All Releases](https://img.shields.io/github/downloads/leonlatsch/scrypt-lite/total?style=for-the-badge)
+![Maintenance](https://img.shields.io/maintenance/yes/2019?style=for-the-badge)
+
 ### Getting started
 
 **Either:**
