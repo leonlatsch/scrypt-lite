@@ -5,6 +5,10 @@
 ![GitHub All Releases](https://img.shields.io/github/downloads/leonlatsch/scrypt-lite/total?style=for-the-badge)
 ![Maintenance](https://img.shields.io/maintenance/yes/2019?style=for-the-badge)
 
+## Encrypt files in the terminal
+
+![gif](https://media.giphy.com/media/IbrrVCEtRwWJHUcDMk/giphy.gif)
+
 ### Getting started
 
 **Either:**
