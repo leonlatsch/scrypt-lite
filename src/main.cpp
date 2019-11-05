@@ -22,7 +22,7 @@ int MODE; // Either 0 (encryption) or 1 (decryption)
 string FILENAME_IN;  // The name of the source file
 string FILENAME_OUT; // The name if the dest file
 string EXTENSION; // Extension for the output file
-string PASSWORD; // Password used for key generatiron
+vector<unsigned char> KEY; // Password used for key generatiron
 string EMPTY; // EMPTY STRING
 string VERSION;
 
@@ -145,14 +145,13 @@ int main(int argc, char** argv) {
         password = read("Enter a password: ", false);
     }
 
-    PASSWORD = sha256Hash(password); // Save the password hash in global variable
+    KEY = sha256Hash(password); // Save the password hash in global variable
 
     info(EMPTY);
-    vector<unsigned char> rawKey(PASSWORD.begin(), PASSWORD.end());
 
     if (MODE == 0) {
         info("Encrypting...");
-        int result = encrypt(FILENAME_IN, FILENAME_OUT, rawKey);
+        int result = encrypt(FILENAME_IN, FILENAME_OUT, KEY);
 
         if (result != 0) {
             error("Could not encrypt: " + FILENAME_IN);
@@ -162,7 +161,7 @@ int main(int argc, char** argv) {
         }
     } else {
         info("Decrypting...");
-        int result = decrypt(FILENAME_IN, FILENAME_OUT, rawKey);
+        int result = decrypt(FILENAME_IN, FILENAME_OUT, KEY);
 
         if (result != 0)  {
             error("Could not decrypt: " + FILENAME_IN);
