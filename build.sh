@@ -5,9 +5,10 @@
 #   Copyright (c) 2019 Leon Latsch
 
 function dev-build() {
+    DEBUG=$1
     echo -n "[*] Building scrypt-lite... "
     mkdir -p bin
-    g++ src/*.cpp src/lib/aes256/*.cpp -o bin/scrypt-lite
+    g++ $DEBUG src/*.cpp src/lib/aes256/*.cpp -o bin/scrypt-lite
     echo "Done"
 }
 
@@ -44,5 +45,5 @@ function release-build() {
 if [ "$#" -gt "0" ]; then
     release-build $1
 else
-    dev-build
+    dev-build -g
 fi
