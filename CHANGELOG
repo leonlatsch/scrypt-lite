@@ -1,7 +1,8 @@
 ## RELEASE-2.0
 - Changed usage notice
 - Added changelog
-- prettify install script
+- Prettify install script
+- Extended build tools
 
 ## RELEASE-1.2
 - Extended build script
