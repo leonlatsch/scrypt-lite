@@ -2,6 +2,7 @@
 - Changed usage notice
 - Added changelog
 - prettify install script
+- change calculation of encryption key
 
 ## RELEASE-1.2
 - Extended build script
