@@ -13,8 +13,9 @@
 */
 
 #include <string>
+#include <vector>
 
 /**
- * Hash a string with SHA-256
+ * Hash a string with SHA-256 as vector
  */
-std::string sha256Hash(std::string str);
+std::vector<unsigned char> sha256Hash(std::string str);

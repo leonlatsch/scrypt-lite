@@ -17,7 +17,8 @@
 
 using namespace std;
 
-string sha256Hash(string str) {
-    string hash = picosha2::hash256_hex_string(str);
+vector<unsigned char> sha256Hash(string str) {
+    vector<unsigned char> hash(32);
+    picosha2::hash256(str.begin(), str.end(), hash.begin(), hash.end());
     return hash;
 }

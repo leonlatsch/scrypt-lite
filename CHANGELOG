@@ -1,7 +1,8 @@
 ## RELEASE-2.0
 - Changed usage notice
 - Added changelog
-- Prettify install script
+- prettify install script
+- change calculation of encryption key
 - Extended build tools
 
 ## RELEASE-1.2
