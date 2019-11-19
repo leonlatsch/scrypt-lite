@@ -3,6 +3,7 @@
 - Added changelog
 - prettify install script
 - change calculation of encryption key
+- Extended build tools
 
 ## RELEASE-1.2
 - Extended build script
