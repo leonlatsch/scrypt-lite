@@ -27,8 +27,7 @@
 using namespace std;
 
 int encrypt(string inFile, string outFile, unsigned char key[]) {
-    size_t fileLen = 0; // In bytes
-    unsigned int outLen = 16 * sizeof(unsigned char);
+    unsigned int fileLen = 0; // In bytes
 
     FILE *in, *out;
 
@@ -45,17 +44,18 @@ int encrypt(string inFile, string outFile, unsigned char key[]) {
 
     double processed;
     AES aes(256);
+    fileLen = ftell(in);
 
     while (!feof(in)) {
         unsigned char buffer[BUFFER_SIZE];
-        unsigned int bufferLength = 16 * sizeof(unsigned char);
+        unsigned int bufferLen;
 
-        bufferLength = fread(buffer, 1, BUFFER_SIZE, in);
-        if(bufferLength > 0) {
-            fwrite(aes.EncryptECB(buffer, bufferLength, key, outLen), outLen, 1, out);
+        bufferLen = fread(buffer, 1, BUFFER_SIZE, in);
+        if(bufferLen > 0) {
+            fwrite(aes.EncryptECB(buffer, bufferLen, key, fileLen), bufferLen, 1, out);
         }
 
-        processed += bufferLength;
+        processed += bufferLen;
         double p = (processed / fileLen) * 100; // calculate percentage proccessed
         printProgress(p / 100); // show updated progress
         
@@ -69,8 +69,7 @@ int encrypt(string inFile, string outFile, unsigned char key[]) {
 }
 
 int decrypt(string inFile, string outFile, unsigned char key[]) {
-    size_t fileLength = 0;
-    unsigned int outLen = 16 * sizeof(unsigned char);
+    unsigned int fileLen = 0;
 
     FILE *in, *out;
 
@@ -86,17 +85,18 @@ int decrypt(string inFile, string outFile, unsigned char key[]) {
 
     double processed;
     AES aes(256);
+    fileLen = ftell(in);
 
     while (!feof(in)) {
         unsigned char buffer[BUFFER_SIZE];
-        unsigned int bufferLength;
+        unsigned int bufferLen;
 
-        bufferLength = fread(buffer, 1, BUFFER_SIZE, in);
-        if(bufferLength > 0)  {
-            fwrite(aes.EncryptECB(buffer, bufferLength, key, outLen), outLen, 1, out);
+        bufferLen = fread(buffer, 1, BUFFER_SIZE, in);
+        if(bufferLen > 0)  {
+            fwrite(aes.EncryptECB(buffer, bufferLen, key, fileLen), bufferLen, 1, out);
         }
-        processed += bufferLength;
-        double p = (processed / fileLength) * 100; // calculate percentage proccessed
+        processed += bufferLen;
+        double p = (processed / fileLen) * 100; // calculate percentage proccessed
         printProgress(p / 100); // show updated progress
     }
     cout << endl;
