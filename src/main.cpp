@@ -151,7 +151,7 @@ int main(int argc, char** argv) {
 
     if (MODE == 0) {
         info("Encrypting...");
-        int result = encrypt(FILENAME_IN, FILENAME_OUT, KEY);
+        int result = encrypt(FILENAME_IN, FILENAME_OUT, KEY.data());
 
         if (result != 0) {
             error("Could not encrypt: " + FILENAME_IN);
@@ -161,7 +161,7 @@ int main(int argc, char** argv) {
         }
     } else {
         info("Decrypting...");
-        int result = decrypt(FILENAME_IN, FILENAME_OUT, KEY);
+        int result = decrypt(FILENAME_IN, FILENAME_OUT, KEY.data());
 
         if (result != 0)  {
             error("Could not decrypt: " + FILENAME_IN);

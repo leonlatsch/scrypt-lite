@@ -18,8 +18,6 @@
 #include <time.h>
 #include <vector>
 
-#include "lib/aes256/aes256.hpp"
-
 using namespace std;
 
 /**
@@ -31,7 +29,7 @@ using namespace std;
  * 
  * @return 0 if no errors occured
  */
-int encrypt(std::string inFile, std::string outFile, std::vector<unsigned char> vectorKey);
+int encrypt(std::string inFile, std::string outFile, unsigned char key[]);
 
 /**
  * Decrypt a file with a key
@@ -42,4 +40,4 @@ int encrypt(std::string inFile, std::string outFile, std::vector<unsigned char> 
  * 
  * @return 0 if no errors occured
  */
-int decrypt(std::string inFile, std::string outFile, std::vector<unsigned char> vectorKey);
+int decrypt(std::string inFile, std::string outFile, unsigned char vectorKey[]);

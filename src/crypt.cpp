@@ -2,8 +2,6 @@
  * scrypt-lite
  * crypt.cpp
  * 
- * @see https://github.com/Urban82/Aes256/blob/master/utils/
- * 
  * @autor Leon Latsch
  * @version 1.0
  */
@@ -21,25 +19,18 @@
 #include <time.h>
 #include <vector>
 
-#include "lib/aes256/aes256.hpp"
+#include "lib/AES/AES.h"
 #include "progressbar.h"
 
 #define BUFFER_SIZE 1024
 
 using namespace std;
 
-int encrypt(string inFile, string outFile, vector<unsigned char> vectorKey) {
-    ByteArray key, enc;
-    size_t fileLength, keyLength = 0; // In bytes
+int encrypt(string inFile, string outFile, unsigned char key[]) {
+    size_t fileLen = 0; // In bytes
+    unsigned int outLen = 16 * sizeof(unsigned char);
 
     FILE *in, *out;
-
-    srand(time(0));
-
-    // Convert key
-    while (vectorKey[keyLength] != 0) {
-        key.push_back(vectorKey[keyLength++]);
-    }
 
     // Read files
     in = fopen(inFile.c_str(), "rb");
@@ -52,38 +43,24 @@ int encrypt(string inFile, string outFile, vector<unsigned char> vectorKey) {
         return 1;
     }
 
-    Aes256 aes(key);
-
-    fseeko64(in, 0, SEEK_END);
-    fileLength = ftell(in);
-    fseeko64(in, 0, SEEK_SET);
-
-    enc.clear();
-    aes.encrypt_start(fileLength, enc);
-    fwrite(enc.data(), enc.size(), 1, out);
-
     double processed;
+    AES aes(256);
 
     while (!feof(in)) {
         unsigned char buffer[BUFFER_SIZE];
-        size_t bufferLength;
+        unsigned int bufferLength = 16 * sizeof(unsigned char);
 
         bufferLength = fread(buffer, 1, BUFFER_SIZE, in);
         if(bufferLength > 0) {
-            enc.clear();
-            aes.encrypt_continue(buffer, bufferLength, enc);
-            fwrite(enc.data(), enc.size(), 1, out);
+            fwrite(aes.EncryptECB(buffer, bufferLength, key, outLen), outLen, 1, out);
         }
+
         processed += bufferLength;
-        double p = (processed / fileLength) * 100; // calculate percentage proccessed
+        double p = (processed / fileLen) * 100; // calculate percentage proccessed
         printProgress(p / 100); // show updated progress
         
     }
     cout << endl;
-
-    enc.clear();
-    aes.encrypt_end(enc);
-    fwrite(enc.data(), enc.size(), 1, out);
 
     fclose(in);
     fclose(out);
@@ -91,17 +68,11 @@ int encrypt(string inFile, string outFile, vector<unsigned char> vectorKey) {
    return 0; 
 }
 
-int decrypt(string inFile, string outFile, vector<unsigned char> vectorKey) {
-    ByteArray key, dec;
-    size_t fileLength, keyLength = 0;
+int decrypt(string inFile, string outFile, unsigned char key[]) {
+    size_t fileLength = 0;
+    unsigned int outLen = 16 * sizeof(unsigned char);
 
     FILE *in, *out;
-
-    srand(time(0));
-
-    while (vectorKey[keyLength] != 0) {
-        key.push_back(vectorKey[keyLength++]);
-    }
 
     in = fopen(inFile.c_str(), "rb");
     if (in == 0) {
@@ -113,34 +84,22 @@ int decrypt(string inFile, string outFile, vector<unsigned char> vectorKey) {
         return 1;
     }
 
-    Aes256 aes(key);
-
-    fseeko64(in, 0, SEEK_END);
-    fileLength = ftell(in);
-    fseeko64(in, 0, SEEK_SET);
-
-    aes.decrypt_start(fileLength);
     double processed;
+    AES aes(256);
 
     while (!feof(in)) {
         unsigned char buffer[BUFFER_SIZE];
-        size_t bufferLength;
+        unsigned int bufferLength;
 
         bufferLength = fread(buffer, 1, BUFFER_SIZE, in);
         if(bufferLength > 0)  {
-            dec.clear();
-            aes.decrypt_continue(buffer, bufferLength, dec);
-            fwrite(dec.data(), dec.size(), 1, out);
+            fwrite(aes.EncryptECB(buffer, bufferLength, key, outLen), outLen, 1, out);
         }
         processed += bufferLength;
         double p = (processed / fileLength) * 100; // calculate percentage proccessed
         printProgress(p / 100); // show updated progress
     }
     cout << endl;
-
-    dec.clear();
-    aes.decrypt_end(dec);
-    fwrite(dec.data(), dec.size(), 1, out);
 
     fclose(in);
     fclose(out);
